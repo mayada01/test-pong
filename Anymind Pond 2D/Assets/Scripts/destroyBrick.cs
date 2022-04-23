@@ -8,6 +8,7 @@ public class destroyBrick : MonoBehaviour
     private int numOfHit;
     public int numOfHitToDestroy;
     public ParticleSystem PopParticle;
+    public GameObject brick;
 
     void Update()
     {
@@ -31,6 +32,7 @@ public class destroyBrick : MonoBehaviour
     void DestroyBrick()
     {
         PopParticle.Play();
+        brick.SetActive(false);
     }
 
 

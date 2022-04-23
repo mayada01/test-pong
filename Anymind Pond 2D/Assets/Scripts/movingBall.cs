@@ -7,8 +7,10 @@ public class movingBall : MonoBehaviour
 
     private float ballSpeed = 2f;
     private Rigidbody2D rbBall;
-    private bool startGame = false;
-    private bool GameOver = false;
+    public static bool startGame = false;
+    public static bool youWin = false;
+    public static bool GameOver = false;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -18,25 +20,30 @@ public class movingBall : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown("space") && !startGame)//Or StartButton
+        if (startGame) //Initiate Game Once Start button is clicked
         {
             StartGame();
+            startGame = false;
 
         }
     }
 
     public void StartGame()
     {
-        startGame = true;
-        float x = Random.Range(1f, 2f);
-        float y = Random.Range(1f, 2f);
-        rbBall.velocity = new Vector2(ballSpeed * x, ballSpeed * y);
+        
+        rbBall.velocity = new Vector2(ballSpeed * 1.75f, ballSpeed * 1.75f);
+        
     }
 
     public void RestartGame()
     {
         GameOver = false;
         startGame = false;
+    }
+
+    public void startGameActive()
+    {
+        startGame = true;
     }
 
 

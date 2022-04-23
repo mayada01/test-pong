@@ -6,8 +6,11 @@ public class platformMovement : MonoBehaviour
 {
 
     private float movementOfPlatform;
-    private float platformSpeed = 8f;
+    private float platformSpeed = 15f;
     private Rigidbody2D rb;
+
+    private bool rightButtonPress;
+    private bool leftButtonPress;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,8 +21,41 @@ public class platformMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        movementOfPlatform = Input.GetAxis("Horizontal");
-        rb.velocity = new Vector2(movementOfPlatform * platformSpeed, rb.velocity.y);
+        
+        movementOfPlatform += platformSpeed * Time.deltaTime;
+        movementOfPlatform = Mathf.Clamp(movementOfPlatform, 0f, 6f);
+
+        if (Input.GetKey(KeyCode.RightArrow) || rightButtonPress)
+        {
+            rb.velocity = new Vector2(movementOfPlatform, rb.velocity.y);
+        }
+        else if (Input.GetKey(KeyCode.LeftArrow) || leftButtonPress)
+        {
+            rb.velocity = new Vector2(movementOfPlatform*-1, rb.velocity.y);
+        }
+        else 
+        {
+            rb.velocity = new Vector2(0,0);
+        }
+
+
+    }
+
+    public void RightButtonTrue()
+    {
+        rightButtonPress = true;
+    }
+    public void RightButtonFalse()
+    {
+        rightButtonPress = false;
+    }
+    public void LeftButtonTrue()
+    {
+        leftButtonPress = true;
+    }
+    public void LeftButtonFalse()
+    {
+        leftButtonPress = false;
     }
 
 }
