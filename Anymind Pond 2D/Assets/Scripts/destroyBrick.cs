@@ -9,10 +9,16 @@ public class destroyBrick : MonoBehaviour
     public int numOfHitToDestroy;
     public ParticleSystem PopParticle;
     public GameObject brick;
+    public static int numOfDestroyedBricks;
 
     void Update()
     {
-
+        if (movingBall.GameOver)
+        {
+            
+            numOfHit = 0;
+            
+        }
     }
 
     void OnCollisionEnter2D(Collision2D other)
@@ -23,9 +29,11 @@ public class destroyBrick : MonoBehaviour
             if (numOfHit == numOfHitToDestroy)
             {
                 DestroyBrick();
+                numOfDestroyedBricks++;
             }
 
         }
+        
 
     }
 

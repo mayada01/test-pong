@@ -11,11 +11,14 @@ public class platformMovement : MonoBehaviour
 
     private bool rightButtonPress;
     private bool leftButtonPress;
+    private Vector2 intialPlatformPos;
+
     // Start is called before the first frame update
     void Start()
     {
 
         rb = GetComponent<Rigidbody2D>();
+        intialPlatformPos = new Vector2(this.transform.position.x, this.transform.position.y);
     }
 
     // Update is called once per frame
@@ -39,6 +42,16 @@ public class platformMovement : MonoBehaviour
         }
 
 
+        if (movingBall.startGame)
+        {
+            ResetPlatformPosition();
+        }
+
+
+    }
+    void ResetPlatformPosition()
+    {
+        this.transform.position = new Vector2(intialPlatformPos.x, intialPlatformPos.y);
     }
 
     public void RightButtonTrue()

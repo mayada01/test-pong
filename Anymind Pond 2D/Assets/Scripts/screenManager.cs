@@ -6,11 +6,11 @@ public class screenManager : MonoBehaviour
 {
 
     public GameObject StartScreen;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public GameObject GameOverScreen;
+    public GameObject WinScreen;
+    public GameObject[] brickObjects;
+    private int numOfDestroyedBricks;
+    public GameObject ballObj;
 
     // Update is called once per frame
     void Update()
@@ -18,7 +18,35 @@ public class screenManager : MonoBehaviour
         if (movingBall.startGame)
         {
             StartScreen.SetActive(false);
+            GameOverScreen.SetActive(false);
+
         }
-        
+        if (movingBall.GameOver)
+        {
+            GameOverScreen.SetActive(true);
+        }
+        RestoreBricks();
+        CheckIfWin();
+
+
+    }
+    void RestoreBricks()
+    {
+        if (movingBall.GameOver)
+        {
+            for (int i = 0; i < brickObjects.Length; i++)
+            {
+                brickObjects[i].SetActive(true);
+            }
+        }
+    }
+    
+    void CheckIfWin()
+    {
+        if (destroyBrick.numOfDestroyedBricks == brickObjects.Length)
+        {
+            WinScreen.SetActive(true);
+            ballObj.SetActive(false);
+        }
     }
 }
