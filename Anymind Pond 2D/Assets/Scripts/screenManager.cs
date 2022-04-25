@@ -8,6 +8,7 @@ public class screenManager : MonoBehaviour
     public GameObject StartScreen;
     public GameObject GameOverScreen;
     public GameObject WinScreen;
+    public GameObject ContinueScreen;
     public GameObject[] brickObjects;
     private int numOfDestroyedBricks;
     public GameObject ballObj;
@@ -24,6 +25,14 @@ public class screenManager : MonoBehaviour
         if (movingBall.GameOver)
         {
             GameOverScreen.SetActive(true);
+        }
+        if (movingBall.ResetPositionAfterBallFall)
+        {
+            ContinueScreen.SetActive(true);
+        }
+        else if (!movingBall.ResetPositionAfterBallFall)
+        {
+            ContinueScreen.SetActive(false);
         }
         RestoreBricks();
         CheckIfWin();

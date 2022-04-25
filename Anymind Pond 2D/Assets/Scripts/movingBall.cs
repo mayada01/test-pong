@@ -13,6 +13,7 @@ public class movingBall : MonoBehaviour
     public static int numOfLivesLeft;
     private int numOfLives = 3;
     private Vector2 startBallPosition;
+    public static bool ResetPositionAfterBallFall;
 
     // Start is called before the first frame update
     void Start()
@@ -82,8 +83,10 @@ public class movingBall : MonoBehaviour
             }
             else if (numOfLivesLeft > 0)
             {
-                ResetBallPosition();
-                startGame = true;
+                ResetPositionAfterBallFall = true;
+                startGame = false;
+                gameIsPlaying = false;
+
             }
         }
     }
@@ -107,6 +110,13 @@ public class movingBall : MonoBehaviour
     public void ExitApplication()
     {
         Application.Quit();
+    }
+
+    public void Continue()
+    {
+        ResetBallPosition();
+        startGame = true;
+        ResetPositionAfterBallFall = false;
     }
 
 }
