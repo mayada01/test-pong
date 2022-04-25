@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - brick-green
+  - platform
+  - walls
   layers:
   - Default
   - TransparentFX

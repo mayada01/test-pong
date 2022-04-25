@@ -45,6 +45,7 @@ public class screenManager : MonoBehaviour
     {
         if (destroyBrick.numOfDestroyedBricks == brickObjects.Length)
         {
+            
             WinScreen.SetActive(true);
             ballObj.SetActive(false);
         }

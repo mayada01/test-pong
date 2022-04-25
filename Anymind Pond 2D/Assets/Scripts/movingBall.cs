@@ -5,10 +5,11 @@ using UnityEngine;
 public class movingBall : MonoBehaviour
 {
 
-    private float ballSpeed = 2f;
+    private float ballSpeed = 2.5f;
     private Rigidbody2D rbBall;
     public static bool startGame = false;
     public static bool GameOver = false;
+    private bool gameIsPlaying = false;
     public static int numOfLivesLeft;
     private int numOfLives = 3;
     private Vector2 startBallPosition;
@@ -31,12 +32,21 @@ public class movingBall : MonoBehaviour
 
         }
     }
+    private void MoveBall()
+    {
+        float x = Random.Range(-1f, 1.5f);
+        float y = Random.Range(1.3f, 1.5f);
+        rbBall.velocity = new Vector2(ballSpeed * x, ballSpeed * y);
+    }
+
 
     public void StartGame()
     {
-        
-        rbBall.velocity = new Vector2(ballSpeed * 1.5f, ballSpeed * 1.5f);
+
+        MoveBall();
+        gameIsPlaying = true;
         startGame = false;
+        //destroyBrick.numOfDestroyedBricks = 0;
 
     }
 
@@ -44,6 +54,7 @@ public class movingBall : MonoBehaviour
     {
         GameOver = false;
         startGame = true;
+        gameIsPlaying = true;
         this.gameObject.SetActive(true);
         ResetBallPosition();
         numOfLivesLeft = numOfLives;
@@ -60,13 +71,14 @@ public class movingBall : MonoBehaviour
     {
 
 
-        if (other.gameObject.tag == "Finish")
+        if (other.gameObject.tag == "Finish" )
         {
 
             numOfLivesLeft--;
             if(numOfLivesLeft == 0 )
             {
                 GameOver = true;
+                gameIsPlaying = false;
             }
             else if (numOfLivesLeft > 0)
             {
@@ -75,10 +87,26 @@ public class movingBall : MonoBehaviour
             }
         }
     }
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "platform")
+        {
+           if (gameIsPlaying)
+           {
+                MoveBall(); // Reset ball movement direction with each platform hit to avoid eternal vertical movement
+           }
+            
+        }
+    }
 
     void ResetBallPosition()
     {
         this.transform.position = new Vector2 (startBallPosition.x, startBallPosition.y);
+    }
+
+    public void ExitApplication()
+    {
+        Application.Quit();
     }
 
 }

@@ -71,4 +71,6 @@ public class platformMovement : MonoBehaviour
         leftButtonPress = false;
     }
 
+    
+
 }

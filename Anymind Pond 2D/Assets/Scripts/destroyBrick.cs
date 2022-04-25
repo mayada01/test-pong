@@ -17,7 +17,7 @@ public class destroyBrick : MonoBehaviour
         {
             
             numOfHit = 0;
-            
+            numOfDestroyedBricks = 0;
         }
     }
 
